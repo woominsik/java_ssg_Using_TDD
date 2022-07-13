@@ -2,14 +2,13 @@ package com.ll.exam;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
-
     @Test
     public void 테스트() {
         assertTrue(1 == 1);
@@ -32,5 +31,15 @@ public class AppTest {
         TestUtil.clearSetOutToByteArray(output);
 
         assertEquals("안녕", rs);
+    }
+
+    @Test
+    public void 문자열을_파일에_저장() {
+        Util.file.mkdir("test_data");
+        Util.file.saveToFile("test_data/1.txt", "안녕");
+
+        String body = Util.file.readFromFile("test_data/1.txt");
+
+        assertEquals("안녕", body);
     }
 }
