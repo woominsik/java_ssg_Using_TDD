@@ -3,8 +3,11 @@ package com.ll.exam;
 import java.io.*;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class TestUtil {
-    // gen == generate 생성하다.
+
+
     public static Scanner genScanner(String input) {
         InputStream in = new ByteArrayInputStream(input.getBytes());
 
