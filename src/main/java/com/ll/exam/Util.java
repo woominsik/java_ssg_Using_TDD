@@ -15,11 +15,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Util {
-    public static class json{
-        static Map<String, Object> jsonToMapFromFile(String path){
+    public static class json {
+
+        public static Map<String, Object> jsonToMapFromFile(String path) {
             String json = file.readFromFile(path, "");
 
-            if ( json.isEmpty() ) {
+            if (json.isEmpty()) {
                 return null;
             }
 
@@ -98,7 +99,7 @@ public class Util {
                         .map(Path::toFile)
                         .forEach(File::delete);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+
             }
         }
 
