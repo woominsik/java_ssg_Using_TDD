@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WiseSayingRepository {
-
-    List<WiseSaying> wiseSayings;
-    int wiseSayingsLastId;
+    private int wiseSayingsLastId;
+    private List<WiseSaying> wiseSayings;
 
     public WiseSayingRepository() {
+        wiseSayingsLastId = 0;
         wiseSayings = new ArrayList<>();
-        wiseSayingsLastId=0;
+    }
+
+    public WiseSaying add(String content, String author) {
+        int id = ++wiseSayingsLastId;
+
+        WiseSaying wiseSaying = new WiseSaying(id, content, author);
+
+        wiseSayings.add(wiseSaying);
+
+        return wiseSaying;
+    }
+
+    public List<WiseSaying> findAll() {
+        return wiseSayings;
     }
 
     public WiseSaying findById(int id) {
@@ -21,18 +34,6 @@ public class WiseSayingRepository {
         }
 
         return null;
-    }
-
-    public WiseSaying write(String content, String author) {
-        int id = ++wiseSayingsLastId;
-        WiseSaying wiseSaying = new WiseSaying(id, content, author);
-        wiseSayings.add(wiseSaying);
-
-        return wiseSaying;
-    }
-
-    public List<WiseSaying> findAll() {
-        return wiseSayings;
     }
 
     public boolean modify(int id, String content, String author) {
