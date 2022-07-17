@@ -19,11 +19,11 @@ public class App {
 
         WiseSayingController wiseSayingController = new WiseSayingController(sc);
 
-        outer:
         while (true) {
             System.out.print("명령) ");
             String cmd = sc.nextLine().trim();
             Rq rq = new Rq(cmd);
+            boolean isEnd = false;
 
             switch (rq.getPath()) {
                 case "등록":
@@ -42,7 +42,11 @@ public class App {
                     wiseSayingController.build(rq);
                     break ;
                 case "종료":
-                    break outer;
+                    isEnd = true;
+                    break;
+            }
+            if(isEnd){
+                break;
             }
         }
     }

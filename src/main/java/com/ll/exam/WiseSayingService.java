@@ -11,8 +11,8 @@ public class WiseSayingService {
         wiseSayingRepository = new WiseSayingRepository();
     }
 
-    public WiseSaying write(String content, String author) {
-        return wiseSayingRepository.add(content, author);
+    public int write(String content, String author) {
+        return wiseSayingRepository.add(content, author).id;
     }
 
     public List<WiseSaying> findAll() {
