@@ -1,6 +1,11 @@
 package com.ll.exam;
 
+import com.ll.exam.dataInput.DataAdd;
+import com.ll.exam.dataInput.DataModify;
+import com.ll.exam.response.*;
+
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WiseSayingController {
@@ -12,74 +17,67 @@ public class WiseSayingController {
         wiseSayingService = new WiseSayingService();
     }
 
-    public void write(Rq rq) {
-        System.out.print("명언 : ");
-        String content = sc.nextLine();
-        System.out.print("작가 : ");
-        String author = sc.nextLine();
+    public Response write(Rq rq) {
+        DataAdd dataAdd = new DataAdd(sc);
+        Map<String, String> params= dataAdd.run();
+        int findId = wiseSayingService.write(params.get("content"), params.get("author"));
 
-        int findId = wiseSayingService.write(content, author);
-
-        System.out.println(findId+"번 명언이 등록되었습니다.");
+        Response r = new ResponseAdd(true, findId);
+        return r;
     }
 
-    public void list(Rq rq) {
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("----------------------");
+    public Response list(Rq rq) {
 
         List<WiseSaying> wiseSayings = wiseSayingService.findAll();
 
-        for(WiseSaying wiseSaying : wiseSayings){
-            System.out.println(wiseSaying.id + " / "+wiseSaying.author+ " / "+ wiseSaying.content);
-        }
+        Response r = new ResponseList(true, wiseSayings);
+        return r;
     }
 
-    public void modify(Rq rq) {
+    public Response modify(Rq rq) {
         int id = rq.getIntParam("id", 0);
 
         if (id == 0) {
-            System.out.println("번호를 입력해주세요.");
-            return;
+            Response r = new ResponseModify(false,id);
+            return r;
         }
 
         WiseSaying wiseSaying = wiseSayingService.findById(id);
 
         if (wiseSaying == null) {
-            System.out.println(id+"번 명언은 존재하지 않습니다.");
-            return;
+            Response r = new ResponseModify(false,id);
+
+            return r;
         }
 
-        System.out.println("명언(기존) : "+ wiseSaying.content);
-        System.out.print("명언 : ");
-        String content = sc.nextLine();
+        DataModify dataModify = new DataModify(sc,wiseSaying);
+        Map<String, String> params = dataModify.run();
 
-        System.out.println("작가(기존) : "+ wiseSaying.author);
-        System.out.print("작가 : ");
-        String author = sc.nextLine();
+        wiseSayingService.modify(id, params.get("content"), params.get("author"));
 
-        wiseSayingService.modify(id, content, author);
-
-        System.out.println(id+"번 명언이 수정되었습니다.\n");
+        Response r = new ResponseModify(true,id);
+        return r;
     }
 
-    public void remove(Rq rq) {
+    public Response remove(Rq rq) {
         int id = rq.getIntParam("id", 0);
 
         if (id == 0) {
-            System.out.println("번호를 입력해주세요.");
-            return;
+            Response r = new ResponseRemove(false,id);
+            return r;
         }
 
         WiseSaying wiseSaying = wiseSayingService.findById(id);
 
         if (wiseSaying == null) {
-            System.out.println(id+"번 명언은 존재하지 않습니다.");
-            return;
+            Response r = new ResponseRemove(false,id);
+            return r;
         }
 
-        wiseSayingService.remove(wiseSaying.id);
+        wiseSayingService.remove(wiseSaying.getId());
 
-        System.out.printf(id+"번 명언이 삭제되었습니다.");
+        Response r = new ResponseRemove(true,id);
+        return r;
     }
 
     public void build(Rq rq) {

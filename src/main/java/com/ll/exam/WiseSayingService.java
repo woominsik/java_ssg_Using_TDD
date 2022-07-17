@@ -12,7 +12,7 @@ public class WiseSayingService {
     }
 
     public int write(String content, String author) {
-        return wiseSayingRepository.add(content, author).id;
+        return wiseSayingRepository.add(content, author).getId();
     }
 
     public List<WiseSaying> findAll() {

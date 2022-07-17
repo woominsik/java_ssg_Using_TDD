@@ -43,9 +43,9 @@ public class WiseSayingTableTest {
     public void 조회() {
         WiseSaying wiseSaying = wiseSayingTable.findById(1);
 
-        assertEquals(1, wiseSaying.id);
-        assertEquals("나에게 불가능이란 없다.", wiseSaying.content);
-        assertEquals("나폴레옹", wiseSaying.author);
+        assertEquals(1, wiseSaying.getId());
+        assertEquals("나에게 불가능이란 없다.", wiseSaying.getContent());
+        assertEquals("나폴레옹", wiseSaying.getAuthor());
     }
 
     @Test
@@ -53,13 +53,13 @@ public class WiseSayingTableTest {
         List<WiseSaying> wiseSayings = wiseSayingTable.findAll();
 
         assertEquals(2, wiseSayings.size());
-        assertEquals(1, wiseSayings.get(0).id);
-        assertEquals("나에게 불가능이란 없다.", wiseSayings.get(0).content);
-        assertEquals("나폴레옹", wiseSayings.get(0).author);
+        assertEquals(1, wiseSayings.get(0).getId());
+        assertEquals("나에게 불가능이란 없다.", wiseSayings.get(0).getContent());
+        assertEquals("나폴레옹", wiseSayings.get(0).getAuthor());
 
-        assertEquals(2, wiseSayings.get(1).id);
-        assertEquals("나의 죽음을 적들에게 알리지 마라.", wiseSayings.get(1).content);
-        assertEquals("이순신", wiseSayings.get(1).author);
+        assertEquals(2, wiseSayings.get(1).getId());
+        assertEquals("나의 죽음을 적들에게 알리지 마라.", wiseSayings.get(1).getContent());
+        assertEquals("이순신", wiseSayings.get(1).getAuthor());
     }
 
     @Test

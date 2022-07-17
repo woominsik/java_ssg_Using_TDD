@@ -16,7 +16,7 @@ public class WiseSayingTable {
     public void save(WiseSaying wiseSaying) {
         Util.file.mkdir("%s/wise_saying".formatted(baseDir));
         String body = wiseSaying.toJson();
-        Util.file.saveToFile("%s/wise_saying/%d.json".formatted(baseDir, wiseSaying.id), body);
+        Util.file.saveToFile("%s/wise_saying/%d.json".formatted(baseDir, wiseSaying.getId()), body);
     }
 
     public WiseSaying save(String content, String author){

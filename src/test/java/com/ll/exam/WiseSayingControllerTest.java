@@ -44,7 +44,7 @@ public class WiseSayingControllerTest {
                 나폴레옹
                 종료
                 """);
-
+        System.out.println(rs);
         assertTrue(rs.contains("1번 명언이 등록되었습니다."));
         assertTrue(rs.contains("2번 명언이 등록되었습니다."));
     }
